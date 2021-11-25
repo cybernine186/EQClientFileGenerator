@@ -14,10 +14,44 @@ int main()
 	{
 		for (int i_class = 1; i_class <= 16; i_class++)
 		{
-			std::cout << i_level << "^" << i_class << "^" << CalcBaseHP(i_level, i_class) << "^" << CalcMana(i_level, i_class) << "^" << CalcEnd(i_level, i_class) << "^" << Unk1(i_level) << "^" << Unk2(i_level) << "^" << CalcHPFactor(i_level, i_class) << "^" << CalcManaFactor(i_level, i_class) << "^" << CalcEndFactor(i_level, i_class) <<  "\n";
+			std::cout << i_level << "^" << i_class << "^" << CalcBaseHP(i_level, i_class) << "^" << CalcMana(i_level, i_class) << "^" << CalcEnd(i_level, i_class) << "^" << CalcHPRegen(i_level) << "^" << CalcEndRegen(i_level) << "^" << CalcHPFactor(i_level, i_class) << "^" << CalcManaFactor(i_level, i_class) << "^" << CalcEndFactor(i_level, i_class) <<  "\n";
 		}
 	}
 }
+
+// Calculation is performed in Client::CalcHPRegen(bool bCombat) client_mods.cpp
+// https://wiki.project1999.com/Character_Races#Increased_HP_Regeneration
+// Values are base standing
+int CalcHPRegen(int level)
+{
+	int value;
+
+	if (level <= 50)
+	{
+		value = 1;
+	}
+	else if (level >= 51 && level <= 55)
+	{
+		value = 2;
+	}
+	else if (level >= 56 && level <= 59)
+	{
+		value = 3;
+	}
+	else if (level >= 60)
+	{
+		value = 4;
+	}
+
+	return value;
+}
+
+// Values are copied from VZTZ original source code in Client::DoEnduranceRegen() client_process.cpp
+double CalcEndRegen(int level)
+{
+	return (level * 4 / 10) + 2;
+}
+
 
 double CalcManaFactor(int level, int eqclass)
 {
@@ -43,6 +77,8 @@ double CalcManaFactor(int level, int eqclass)
 	return i_mana;
 }
 
+// Formula is calculated from classic standards, reference chart is from P99.
+// https://wiki.project1999.com/Game_Mechanics#Hitpoint_Calculation
 double CalcHPFactor(int level, int eqclass)
 {
 	double factor = 0.0;
@@ -103,126 +139,6 @@ double CalcHPFactor(int level, int eqclass)
 	}
 	return factor * i_level / 40;
 }
-/*
-My Original calculations
-double CalcHPFactor(int level, int eqclass)
-{
-	double i_mana = 0.0;
-	double i_level = 1.0 * level;
-
-	switch (eqclass)
-	{
-	case CLERIC:
-		i_mana = 1 * i_level / 40;
-		break;
-	case DRUID:
-	case SHAMAN:
-		i_mana = 2 * i_level / 40;
-		break;
-	case RANGER:
-		i_mana = 2.6 * i_level / 40;
-		break;
-	case MONK:
-	case BARD:
-	case ROGUE:
-		i_mana = 2.4 * i_level / 40;
-		break;
-	case SHADOWKNIGHT:
-	case PALADIN:
-		i_mana = 3 * i_level / 40;
-		break;
-	case WARRIOR:
-		i_mana = 3.6 * i_level / 40;
-		break;
-	default:
-		i_mana = 3 * i_level / 40;
-		break;
-	}
-	return i_mana;
-}
-*/
-
-int Unk1(int level)
-{
-	int base = 1;
-	int value, modifier;
-
-	if (level <= 10)
-	{
-		modifier = 1;
-	}
-	else if (level >= 11 && level < 20)
-	{
-		modifier = 2;
-	}
-	else if (level >= 20 && level < 30)
-	{
-		modifier = 3;
-	}
-	else if (level >= 30 && level < 40)
-	{
-		modifier = 4;
-	}
-	else if (level >= 40 && level < 50)
-	{
-		modifier = 5;
-	}
-	else if (level >= 50 && level < 60)
-	{
-		modifier = 6;
-	}
-	else if (level >= 60 && level < 70)
-	{
-		modifier = 7;
-	}
-	else if (level >= 70 && level < 85)
-	{
-		modifier = 8;
-	}
-	else if (level >= 85 && level < 90)
-	{
-		modifier = 9;
-	}
-	else if (level >= 90)
-	{
-		modifier = 10;
-	}
-
-	value = base + modifier;
-
-	return value;
-}
-
-int Unk2(int level)
-{
-	int base = 4;
-	int value, modifier;
-
-	if (level < 20)
-	{
-		modifier = 1;
-	}
-	else if (level >= 20 && level <= 40)
-	{
-		modifier = 2;
-	}
-	else if (level >= 40 && level <= 60)
-	{
-		modifier = 3;
-	}
-	else if (level >= 60 && level <= 80)
-	{
-		modifier = 4;
-	}
-	else if (level >= 80 && level <= 100)
-	{
-		modifier = 5;
-	}
-
-	value = base + modifier;
-
-	return value;
-}
 
 double CalcEndFactor(int level, int eqclass)
 {
@@ -269,8 +185,6 @@ int CalcMana(int level, int eqclass)
 		mana = 0;
 		break;
 	}
-
-
 
 	return mana;
 }

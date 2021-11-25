@@ -8,8 +8,8 @@ double CalcManaFactor(int level, int eqclass);
 double CalcEndFactor(int level, int eqclass);
 int CalcMana(int level, int eqclass);
 int CalcEnd(int level, int eqclass);
-int Unk1(int level);
-int Unk2(int level);
+int CalcHPRegen(int level);
+double CalcEndRegen(int level);
 
 #define Array_Class_UNKNOWN 0
 #define WARRIOR      1
