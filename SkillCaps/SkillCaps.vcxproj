@@ -24,6 +24,7 @@
     <ProjectGuid>{7d06b76f-78e7-4d98-bbe1-b5b85cdab89b}</ProjectGuid>
     <RootNamespace>EQSkills</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>SkillCaps</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -139,10 +140,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EQSkills.cpp" />
+    <ClCompile Include="SkillCaps.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EQSkills.h" />
+    <ClInclude Include="SkillCaps.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

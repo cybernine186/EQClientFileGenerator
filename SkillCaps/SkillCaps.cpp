@@ -2,7 +2,7 @@
 //
 
 #include <iostream>
-#include "EQSkills.h"
+#include "SkillCaps.h"
 
 FILE* stream;
 

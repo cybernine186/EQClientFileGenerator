@@ -15,12 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EQSkills.cpp">
+    <ClCompile Include="SkillCaps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EQSkills.h">
+    <ClInclude Include="SkillCaps.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

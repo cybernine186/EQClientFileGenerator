@@ -277,10 +277,7 @@ int CalcMana(int level, int eqclass)
 
 int CalcEnd(int level, int eqclass)
 {
-	int end;
-	int factor;
-
-	end = level * 15;
+	int end = level * 15;
 
 	if (level > 40)
 	{
