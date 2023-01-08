@@ -12,7 +12,7 @@ int main()
 
 	for (int i_level = 1; i_level <= 100; i_level++)
 	{
-		for (int i_class = 1; i_class <= 16; i_class++)
+		for (int i_class = 1; i_class <= PLAYER_CLASS_COUNT; i_class++)
 		{
 			std::cout << i_level << "^" << i_class << "^" << CalcBaseHP(i_level, i_class) << "^" << CalcMana(i_level, i_class) << "^" << CalcEnd(i_level, i_class) << "^" << CalcHPRegen(i_level) << "^" << CalcEndRegen(i_level) << "^" << CalcHPFactor(i_level, i_class) << "^" << CalcManaFactor(i_level, i_class) << "^" << CalcEndFactor(i_level, i_class) <<  "\n";
 		}
@@ -67,6 +67,7 @@ double CalcManaFactor(int level, int eqclass)
 		case RANGER:
 		case SHADOWKNIGHT:
 		case PALADIN:
+		case BEASTLORD:
 			i_mana = 1.5 * i_level / 40;
 			break;
 		default:
@@ -103,6 +104,7 @@ double CalcHPFactor(int level, int eqclass)
 	case MONK:
 	case BARD:
 	case ROGUE:
+	case BEASTLORD:
 		if (level > 50)
 			factor = 4.0;
 		else
@@ -211,11 +213,6 @@ char GetCasterClass(int eqclass)
 	case DRUID:
 	case SHAMAN:
 	case BEASTLORD:
-	case CLERICGM:
-	case PALADINGM:
-	case RANGERGM:
-	case DRUIDGM:
-	case SHAMANGM:
 		return 'W';
 		break;
 
@@ -225,12 +222,6 @@ char GetCasterClass(int eqclass)
 	case WIZARD:
 	case MAGICIAN:
 	case ENCHANTER:
-	case SHADOWKNIGHTGM:
-	case BARDGM:
-	case NECROMANCERGM:
-	case WIZARDGM:
-	case MAGICIANGM:
-	case ENCHANTERGM:
 		return 'I';
 		break;
 

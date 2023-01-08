@@ -10,7 +10,7 @@ int main()
 {	
 	freopen_s(&stream, "SkillCaps.txt", "w", stdout);
 
-	for (int i_class = 1; i_class <= 14; i_class++)
+	for (int i_class = 1; i_class <= PLAYER_CLASS_COUNT; i_class++)
 	{
 		for (int i_skill = 0; i_skill <= 73; i_skill++)
 		{
@@ -28,13 +28,24 @@ int main()
 
 int CheckMaxSkill(int skillid, int eqclass, int level)
 {
-
+	int levelRequired = 1;
 	// Special checks for NPCs
-	if ((level <= 40 || (eqclass == BARD && level <= 58)))
-	{
-		int levelRequired = 1;
+	//if ((level <= 40 || (eqclass == BARD && level <= 58)))
+	//{
+		
 		switch (skillid)
 		{
+		case KICK:
+		{
+			switch (eqclass)
+			{
+			case RANGER:
+			case BEASTLORD:
+				levelRequired = 5;
+				break;
+			}
+			break;
+		}
 		case INTIMIDATION:
 		{
 			switch (eqclass)
@@ -283,6 +294,7 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 			case RANGER:
 			case SHADOWKNIGHT:
 			case PALADIN:
+			case BEASTLORD:
 				levelRequired = 9;
 				break;
 			}
@@ -305,6 +317,7 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 				break;
 			case PALADIN:
 			case SHADOWKNIGHT:
+			case BEASTLORD:
 				levelRequired = 12;
 				break;
 			case RANGER:
@@ -349,7 +362,9 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 		{
 			switch (eqclass)
 			{
-			case WARRIOR: case WARRIORGM: case BANKER: case MERCHANT: case PALADIN: case SHADOWKNIGHT: case PALADINGM: case SHADOWKNIGHTGM:
+			case WARRIOR: 
+			case PALADIN: 
+			case SHADOWKNIGHT: 
 				levelRequired = 6;
 				break;
 			case CLERIC:
@@ -362,22 +377,30 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 		{
 			switch (eqclass)
 			{
-			case WARRIOR: case WARRIORGM: case BANKER: case MERCHANT:
+			case WARRIOR: 
 				levelRequired = 6;
 				break;
-			case CLERIC: case DRUID: case SHAMAN: case CLERICGM: case DRUIDGM: case SHAMANGM:
+			case CLERIC: 
+			case DRUID: 
+			case SHAMAN: 
 				levelRequired = 15;
 				break;
-			case RANGER: case RANGERGM:
+			case RANGER: 
 				levelRequired = 8;
 				break;
-			case ROGUE: case ROGUEGM:
+			case ROGUE: 
 				levelRequired = 4;
 				break;
-			case PALADIN: case PALADINGM: case SHADOWKNIGHT: case SHADOWKNIGHTGM: case BARD: case BARDGM:
+			case PALADIN:
+			case SHADOWKNIGHT: 
+			case BARD:
+			case BEASTLORD:
 				levelRequired = 10;
 				break;
-			case NECROMANCER: case WIZARD: case ENCHANTER: case MAGICIAN: case NECROMANCERGM: case WIZARDGM: case ENCHANTERGM: case MAGICIANGM:
+			case NECROMANCER: 
+			case WIZARD: 
+			case ENCHANTER: 
+			case MAGICIAN: 
 				levelRequired = 22;
 				break;
 			}
@@ -387,19 +410,20 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 		{
 			switch (eqclass)
 			{
-			case WARRIOR: case WARRIORGM: case BANKER: case MERCHANT:
+			case WARRIOR: 
 				levelRequired = 10;
 				break;
-			case PALADIN: case PALADINGM: case SHADOWKNIGHT: case SHADOWKNIGHTGM:
+			case PALADIN: 
+			case SHADOWKNIGHT: 
 				levelRequired = 17;
 				break;
-			case RANGER: case RANGERGM:
+			case RANGER: 
 				levelRequired = 18;
 				break;
-			case ROGUE: case ROGUEGM:
+			case ROGUE: 
 				levelRequired = 12;
 				break;
-			case BARD: case BARDGM:
+			case BARD: 
 				levelRequired = 53;
 				break;
 			}
@@ -409,10 +433,13 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 		{
 			switch (eqclass)
 			{
-			case WARRIOR: case WARRIORGM: case BANKER: case MERCHANT: case ROGUE: case ROGUEGM:
+			case WARRIOR: 
+			case ROGUE: 
 				levelRequired = 13;
 				break;
-			case RANGER: case RANGERGM: case BARD: case BARDGM:
+			case RANGER: 
+			case BARD: 
+			case BEASTLORD:
 				levelRequired = 17;
 				break;
 			}
@@ -422,13 +449,16 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 		{
 			switch (eqclass)
 			{
-			case WARRIOR: case WARRIORGM: case BANKER: case MERCHANT: case MONK: case MONKGM:
+			case WARRIOR: 
+			case MONK: 
 				levelRequired = 15;
 				break;
-			case PALADIN: case PALADINGM: case SHADOWKNIGHT: case SHADOWKNIGHTGM: case RANGER: case RANGERGM:
+			case PALADIN: 
+			case SHADOWKNIGHT: 
+			case RANGER: 
 				levelRequired = 20;
 				break;
-			case ROGUE: case ROGUEGM:
+			case ROGUE: 
 				levelRequired = 16;
 				break;
 			}
@@ -438,16 +468,22 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 		{
 			switch (eqclass)
 			{
-			case WARRIOR: case WARRIORGM: case BANKER: case MERCHANT:
+			case WARRIOR: 
 				levelRequired = 25;
 				break;
-			case RANGER: case RANGERGM: case MONK: case MONKGM:
+			case RANGER: 
+			case MONK: 
 				levelRequired = 35;
 				break;
-			case PALADIN: case PALADINGM: case SHADOWKNIGHT: case SHADOWKNIGHTGM: case ROGUE: case ROGUEGM:
+			case PALADIN: 
+			case SHADOWKNIGHT: 
+			case ROGUE: 
 				levelRequired = 30;
 				break;
-			case BARD: case BARDGM:
+			case BEASTLORD:
+				levelRequired = 40;
+				break;
+			case BARD: 
 				levelRequired = 58;
 				break;
 			}
@@ -457,13 +493,16 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 		{
 			switch (eqclass)
 			{
-			case WARRIOR: case WARRIORGM: case BANKER: case MERCHANT: case RANGER: case RANGERGM:
+			case WARRIOR: 
+			case RANGER: 
 				levelRequired = 35;
 				break;
-			case PALADIN: case PALADINGM: case SHADOWKNIGHT: case SHADOWKNIGHTGM:
+			case PALADIN: 
+			case SHADOWKNIGHT: 
 				levelRequired = 40;
 				break;
-			case MONK: case MONKGM: case ROGUE: case ROGUEGM:
+			case MONK: 
+			case ROGUE: 
 				levelRequired = 27;
 				break;
 			}
@@ -471,8 +510,14 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 		}
 		case BLOCKSKILL:
 		{
-			if (eqclass == MONK)
+			switch (eqclass) {
+			case MONK:
 				levelRequired = 12;
+				break;
+			case BEASTLORD:
+				levelRequired = 25;
+				break;
+			}
 			break;
 		}
 		case ROUND_KICK:
@@ -511,7 +556,7 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 			return 0;
 		}
 
-	}
+	//}
 
 	// Next, special check for trade skills to make sure only one skill is above 200
 	// Note: There is no level requirement for trade skills. A level 1 can get 200+ in any trade skill
@@ -554,6 +599,7 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 
 	// Mob is level 50 and under
 	if (level <= 50) {
+
 		levelSkillCap = (int)level * 5 + 5;
 		maximumSkillCap = maxSkills[skillid][eqclass - 1];
 	}
