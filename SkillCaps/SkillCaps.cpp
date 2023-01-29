@@ -550,7 +550,14 @@ int CheckMaxSkill(int skillid, int eqclass, int level)
 				levelRequired = 30;
 			break;
 		}
+		case FEIGN_DEATH:
+		{
+			if (eqclass == MONK)
+				levelRequired = 17;
+			break;
 		}
+		}
+
 		if (levelRequired > level)
 		{
 			return 0;
